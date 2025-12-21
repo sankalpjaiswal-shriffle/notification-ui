@@ -51,8 +51,13 @@ export const StyledAlert = styled(Alert)<CustomAction>(
       "&.MuiAlert-root": {
         color: "#9e9e9e",
         opacity: 0.7,
+        backgroundColor: "#fff",
       },
       "&.MuiAlert-icon": {
+        color: "#9e9e9e",
+        opacity: 0.7,
+      },
+      "& .MuiSvgIcon-root": {
         color: "#9e9e9e",
         opacity: 0.7,
       },
@@ -68,7 +73,10 @@ export const StyledSnackBar = styled(Snackbar)<CustomAction>(
     height: actiontype === "all" ? 64 : actiontype === "none" ? 40 : 56,
     padding: "8px 16px",
     ...(disabled && {
-      "&.MuiSnackbarContent-root": { color: "#9e9e9e", opacity: 0.7 },
+      "&.MuiSnackbarContent-root": {
+        color: "#9e9e9e",
+        opacity: 0.7,
+      },
     }),
   })
 );
