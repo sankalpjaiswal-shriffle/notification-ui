@@ -1,7 +1,21 @@
-import { Alert, Button, IconButton, Snackbar, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  IconButton,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import type { NotificationAction, NotificationVariant } from "./Notification";
+import type {
+  NotificationAction,
+  NotificationVariant,
+} from "./Notification.types";
+import {
+  notificationAction,
+  notificationHeight,
+} from "./Notification.constant";
 
 interface CustomVariant {
   typevariant?: NotificationVariant;
@@ -38,7 +52,12 @@ export const StyledAlert = styled(Alert)<CustomAction>(
     alignItems: "center",
     boxSizing: "border-box",
     minWidth: 344,
-    height: actiontype === "all" ? 64 : actiontype === "none" ? 40 : 56,
+    height:
+      actiontype === notificationAction.all
+        ? notificationHeight.all
+        : actiontype === notificationAction.none
+        ? notificationHeight.none
+        : notificationHeight.oneButton,
     maxWidth: 544,
     width: "100%",
     padding: "8px 16px",
@@ -70,7 +89,12 @@ export const StyledSnackBar = styled(Snackbar)<CustomAction>(
     minWidth: 344,
     maxWidth: 544,
     boxSizing: "border-box",
-    height: actiontype === "all" ? 64 : actiontype === "none" ? 40 : 56,
+    height:
+      actiontype === notificationAction.all
+        ? notificationHeight.all
+        : actiontype === notificationAction.none
+        ? notificationHeight.none
+        : notificationHeight.oneButton,
     padding: "8px 16px",
     ...(disabled && {
       "&.MuiSnackbarContent-root": {
@@ -91,3 +115,11 @@ export const StyledTypography = styled(Typography)<CustomTypography>(
     }),
   })
 );
+
+export const StyledBox = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
+  boxSizing: "border-box",
+}));

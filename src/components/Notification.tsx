@@ -1,25 +1,22 @@
 import { Undo } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box, Typography, type SnackbarCloseReason } from "@mui/material";
+import { Typography, type SnackbarCloseReason } from "@mui/material";
 import { useState } from "react";
+import type {
+  NotificationAction,
+  NotificationSeverity,
+  NotificationVariant,
+} from "./Notification.types";
 
-import InfoIcon from "@mui/icons-material/Info";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import DangerousIcon from "@mui/icons-material/Dangerous";
-import WarningIcon from "@mui/icons-material/Warning";
 import {
   StyledAlert,
+  StyledBox,
   StyledButton,
   StyledIconButton,
   StyledSnackBar,
   StyledTypography,
 } from "./Notification.styles";
-
-export type NotificationSeverity = "success" | "info" | "error" | "warning";
-
-export type NotificationVariant = "primary" | "secondary" | "default";
-
-export type NotificationAction = "all" | "undo" | "close" | "none";
+import { severityIcon, variantObj } from "./Notification.constant";
 
 export interface NotificationProps {
   variant: NotificationVariant;
@@ -32,18 +29,6 @@ export interface NotificationProps {
   onClose: () => void;
   autoHideDuration?: number | null;
 }
-const severityIcon = {
-  success: <CheckCircleIcon sx={{ fontSize: 24 }} />,
-  info: <InfoIcon sx={{ fontSize: 24 }} />,
-  error: <DangerousIcon sx={{ fontSize: 24 }} />,
-  warning: <WarningIcon sx={{ fontSize: 24 }} />,
-};
-
-const variantObj = {
-  primary: "filled",
-  secondary: "standard",
-  default: "secondary",
-};
 
 const Notification = ({
   variant,
@@ -84,16 +69,7 @@ const Notification = ({
     if (action === "all") {
       return (
         <>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              boxSizing: "border-box",
-              marginRight: 0,
-            }}
-          >
+          <StyledBox>
             <StyledIconButton
               aria-label="close"
               size="small"
@@ -113,21 +89,14 @@ const Notification = ({
               <Undo />
               Undo
             </StyledButton>
-          </Box>
+          </StyledBox>
         </>
       );
     }
 
     if (action === "undo") {
       return (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
+        <StyledBox>
           <StyledButton
             typevariant={variant}
             size="small"
@@ -137,20 +106,13 @@ const Notification = ({
             <Undo />
             Undo
           </StyledButton>
-        </Box>
+        </StyledBox>
       );
     }
 
     if (action === "close") {
       return (
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
+        <StyledBox>
           <StyledIconButton
             aria-label="close"
             size="small"
@@ -160,7 +122,7 @@ const Notification = ({
           >
             <CloseIcon />
           </StyledIconButton>
-        </Box>
+        </StyledBox>
       );
     }
   };
