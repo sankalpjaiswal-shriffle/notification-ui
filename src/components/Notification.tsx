@@ -1,12 +1,4 @@
-import { Undo } from "@mui/icons-material";
-import CloseIcon from "@mui/icons-material/Close";
-import { Typography, type SnackbarCloseReason } from "@mui/material";
 import { useState } from "react";
-import type {
-  NotificationAction,
-  NotificationSeverity,
-  NotificationVariant,
-} from "./Notification.types";
 
 import {
   StyledAlert,
@@ -15,20 +7,14 @@ import {
   StyledIconButton,
   StyledSnackBar,
   StyledTypography,
-} from "./Notification.styles";
-import { severityIcon, variantObj } from "./Notification.constant";
+} from "./styles";
 
-export interface NotificationProps {
-  variant: NotificationVariant;
-  severity: NotificationSeverity;
-  heading: string;
-  description: string;
-  disabled?: boolean;
-  action?: NotificationAction;
-  onOpen: () => void;
-  onClose: () => void;
-  autoHideDuration?: number | null;
-}
+import { type SnackbarCloseReason } from "@mui/material";
+import { Undo } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
+
+import { SEVERITY_ICONS, VARIANT, NOTIFICATION_ACTION, TEXT } from "./constant";
+import type { NotificationProps } from "./types";
 
 const Notification = ({
   variant,
@@ -37,22 +23,24 @@ const Notification = ({
   description,
   onOpen,
   onClose,
+  onUndo,
   disabled = false,
   action = "none",
   autoHideDuration = null,
 }: NotificationProps) => {
   const [open, setOpen] = useState(false);
+  const Icon = SEVERITY_ICONS[severity];
 
-  function handleOpen() {
+  const handleOpen = () => {
     setOpen(true);
     onOpen();
-  }
+  };
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason
   ) => {
-    if (reason === "clickaway") {
+    if (reason === TEXT.CLICKAWAY) {
       return;
     }
     setOpen(false);
@@ -60,25 +48,26 @@ const Notification = ({
   };
 
   const handleUndo = () => {
-    console.log("Undo");
+    onUndo();
   };
 
   const actions = () => {
-    if (action === "none") return;
+    switch (action) {
+      case NOTIFICATION_ACTION.NONE:
+        return;
 
-    if (action === "all") {
-      return (
-        <>
+      case NOTIFICATION_ACTION.ALL:
+        return (
           <StyledBox>
-            <StyledIconButton
+            <StyledButton
               aria-label="close"
               size="small"
               onClick={handleClose}
               disabled={disabled}
               typevariant={variant}
             >
-              <CloseIcon />
-            </StyledIconButton>
+              <CloseIcon sx={{ fontSize: 20 }} />
+            </StyledButton>
 
             <StyledButton
               typevariant={variant}
@@ -86,50 +75,46 @@ const Notification = ({
               onClick={handleUndo}
               disabled={disabled}
             >
-              <Undo />
-              Undo
+              <Undo sx={{ fontSize: 20 }} />
+              {TEXT.UNDO}
             </StyledButton>
           </StyledBox>
-        </>
-      );
-    }
+        );
+      case NOTIFICATION_ACTION.UNDO:
+        return (
+          <StyledBox>
+            <StyledButton
+              typevariant={variant}
+              size="small"
+              onClick={handleUndo}
+              disabled={disabled}
+            >
+              <Undo sx={{ fontSize: 20 }} />
+              {TEXT.UNDO}
+            </StyledButton>
+          </StyledBox>
+        );
 
-    if (action === "undo") {
-      return (
-        <StyledBox>
-          <StyledButton
-            typevariant={variant}
-            size="small"
-            onClick={handleUndo}
-            disabled={disabled}
-          >
-            <Undo />
-            Undo
-          </StyledButton>
-        </StyledBox>
-      );
-    }
-
-    if (action === "close") {
-      return (
-        <StyledBox>
-          <StyledIconButton
-            aria-label="close"
-            size="small"
-            onClick={handleClose}
-            disabled={disabled}
-            typevariant={variant}
-          >
-            <CloseIcon />
-          </StyledIconButton>
-        </StyledBox>
-      );
+      case NOTIFICATION_ACTION.CLOSE:
+        return (
+          <StyledBox>
+            <StyledButton
+              aria-label="close"
+              size="small"
+              onClick={handleClose}
+              disabled={disabled}
+              typevariant={variant}
+            >
+              <CloseIcon sx={{ fontSize: 20 }} />
+            </StyledButton>
+          </StyledBox>
+        );
     }
   };
 
   return (
-    <div>
-      <button onClick={handleOpen}>Open</button>
+    <>
+      <button onClick={handleOpen}>{TEXT.OPEN}</button>
       <StyledSnackBar
         actiontype={action}
         open={open}
@@ -141,20 +126,20 @@ const Notification = ({
           actiontype={action}
           elevation={6}
           role="alert"
-          icon={severityIcon[severity]}
-          variant={variantObj[variant] as any}
+          icon={<Icon sx={{ fontSize: 24 }} />}
+          variant={VARIANT[variant] as any}
           severity={severity}
           action={actions()}
           disabled={disabled}
         >
-          <Typography
+          <StyledTypography
             variant="h3"
             textAlign={"start"}
             fontSize={14}
             fontWeight={600}
           >
             {heading}
-          </Typography>
+          </StyledTypography>
           {description && (
             <StyledTypography
               variant="body2"
@@ -168,7 +153,7 @@ const Notification = ({
           )}
         </StyledAlert>
       </StyledSnackBar>
-    </div>
+    </>
   );
 };
 
