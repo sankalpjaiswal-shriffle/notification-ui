@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Notification, {
-  type NotificationProps,
-} from "../components/Notification";
+import NotificationTest from "../components/Notification";
+import type { NotificationProps } from "../components/types";
 import { fn } from "storybook/test";
 import { useState } from "react";
 import { Box } from "@mui/material";
 
-const meta: Meta<typeof Notification> = {
+const meta: Meta<typeof NotificationTest> = {
   title: "Components/Notification",
-  component: Notification,
+  component: NotificationTest,
   argTypes: {
     heading: {
       control: "select",
@@ -20,7 +19,7 @@ const meta: Meta<typeof Notification> = {
     },
     variant: {
       control: "select",
-      options: ["primary", "secondary", "default"],
+      options: ["PRIMARY", "SECONDARY", "DEFAULT"],
     },
     description: {
       control: "text",
@@ -38,14 +37,14 @@ const meta: Meta<typeof Notification> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Notification>;
+type Story = StoryObj<typeof NotificationTest>;
 
 const NotificationWrapper = (args: NotificationProps) => {
   const [open, setOpen] = useState(true);
 
   return (
     <Box>
-      <Notification
+      <NotificationTest
         {...args}
         onOpen={() => {
           setOpen(true);
@@ -65,7 +64,7 @@ export const Primary: Story = {
   render: (args) => <NotificationWrapper {...args} />,
   args: {
     severity: "success",
-    variant: "primary",
+    variant: "PRIMARY",
     heading: "Success",
     description: "Task completed",
     action: "all",
@@ -77,7 +76,7 @@ export const Secondary: Story = {
   render: (args) => <NotificationWrapper {...args} />,
   args: {
     severity: "success",
-    variant: "secondary",
+    variant: "SECONDARY",
     heading: "Success",
     description: "Task completed",
     action: "all",
@@ -89,7 +88,7 @@ export const Default: Story = {
   render: (args) => <NotificationWrapper {...args} />,
   args: {
     severity: "success",
-    variant: "default",
+    variant: "DEFAULT",
     heading: "Success",
     description: "Task completed",
     action: "all",

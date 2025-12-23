@@ -6,7 +6,7 @@ function App() {
     <div>
       <Notification
         severity={"success"}
-        variant={"secondary"}
+        variant={"PRIMARY"}
         heading="Success"
         description="Task 1 completed"
         action={"all"}
@@ -14,6 +14,7 @@ function App() {
         onOpen={() => {}}
         onClose={() => {}}
         autoHideDuration={null}
+        onUndo={() => {}}
       />
     </div>
   );
