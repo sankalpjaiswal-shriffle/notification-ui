@@ -97,6 +97,5 @@ export {
   StyledAlert,
   StyledSnackBar,
   StyledButton,
-  StyledIconButton,
   StyledTypography,
 };

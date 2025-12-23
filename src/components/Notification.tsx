@@ -4,7 +4,6 @@ import {
   StyledAlert,
   StyledBox,
   StyledButton,
-  StyledIconButton,
   StyledSnackBar,
   StyledTypography,
 } from "./styles";
