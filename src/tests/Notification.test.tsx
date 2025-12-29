@@ -1,19 +1,21 @@
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import Notification from "../components/Notification";
-import type { NotificationProps } from "../components/Notification";
+import Notification from "../components/Notification/Notification";
+import type { NotificationProps } from "../components/Notification/types";
 import { describe, expect, it, vi } from "vitest";
 
 const onOpen = vi.fn();
 const onClose = vi.fn();
+const onUndo = vi.fn();
 
 const notificationProps: NotificationProps = {
-  variant: "primary",
+  variant: "PRIMARY",
   severity: "success",
   heading: "Success",
   description: "Task completed",
   onOpen: onOpen,
   onClose: onClose,
+  onUndo: onUndo,
 };
 
 describe("Notification component", () => {
@@ -73,8 +75,7 @@ describe("Notification component", () => {
     fireEvent.click(screen.getByText("Open"));
     const undoBtn = screen.getByText("UNDO", { exact: false });
     fireEvent.click(undoBtn);
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-    expect(consoleSpy).toHaveBeenCalledWith("Undo");
+    expect(onUndo).toHaveBeenCalledTimes(1);
   });
 
   it("Notification with action none", () => {

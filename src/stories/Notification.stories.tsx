@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import NotificationTest from "../components/Notification";
-import type { NotificationProps } from "../components/types";
+import NotificationTest from "../components/Notification/Notification";
+import type { NotificationProps } from "../components/Notification/types";
 import { fn } from "storybook/test";
 import { useState } from "react";
 import { Box } from "@mui/material";
