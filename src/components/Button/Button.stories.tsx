@@ -134,8 +134,20 @@ const EndIconBtn: Story = {
     variant: "contained",
     color: "info",
     size: "medium",
-    label: "Start Icon",
+    label: "End Icon",
     endIcon: SendIcon,
+  },
+};
+
+const LoadingBtn: Story = {
+  args: {
+    variant: "contained",
+    color: "info",
+    size: "medium",
+    label: "End Icon",
+    endIcon: SendIcon,
+    loading: true,
+    loadingPosition: "end",
   },
 };
 
@@ -171,6 +183,7 @@ export {
   OutlinedBtn,
   StartIconBtn,
   EndIconBtn,
+  LoadingBtn,
   DisabledBtn,
   HrefBtn,
 };

@@ -155,4 +155,23 @@ describe("Button Component", () => {
     fireEvent.click(button);
     expect(onClick).not.toBeCalledTimes(1);
   });
+
+  it("When loading is enabled then onClick should not work", () => {
+    render(
+      <ButtonTest
+        {...ButtonProps}
+        endIcon={SendIcon}
+        loading={true}
+        loadingPosition="end"
+      />
+    );
+
+    const button = screen.getByRole("button");
+    const EndIcon = screen.getByTestId("SendIcon");
+    expect(EndIcon).toBeInTheDocument();
+    expect(button).toBeDisabled();
+    fireEvent.click(button);
+    expect(onClick).not.toBeCalled();
+    expect(onClick).not.toBeCalledTimes(1);
+  });
 });

@@ -13,6 +13,8 @@ const Button = ({
   type,
   href,
   fullWidth,
+  loading,
+  loadingPosition,
 }: ButtonProps) => {
   return (
     <ButtonMUI
@@ -29,6 +31,8 @@ const Button = ({
       fullWidth={fullWidth}
       type={type}
       href={href}
+      loading={loading}
+      loadingPosition={loadingPosition}
     >
       {label}
     </ButtonMUI>
