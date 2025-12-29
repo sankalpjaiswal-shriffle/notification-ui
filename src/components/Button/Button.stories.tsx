@@ -149,6 +149,16 @@ const DisabledBtn: Story = {
   },
 };
 
+const HrefBtn: Story = {
+  args: {
+    variant: "contained",
+    color: "info",
+    size: "medium",
+    label: "Button",
+    href: "#link",
+  },
+};
+
 export {
   Primary,
   Secondary,
@@ -162,4 +172,5 @@ export {
   StartIconBtn,
   EndIconBtn,
   DisabledBtn,
+  HrefBtn,
 };

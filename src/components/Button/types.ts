@@ -22,9 +22,9 @@ interface ButtonProps {
   onClick?: () => void;
   startIcon?: React.ElementType<SvgIconProps>;
   endIcon?: React.ElementType<SvgIconProps>;
-  fullWidth: boolean;
+  fullWidth?: boolean;
   type?: type;
-  href: string;
+  href?: string;
 }
 
 export type { ButtonProps };
