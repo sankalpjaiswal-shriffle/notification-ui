@@ -10,6 +10,9 @@ const Button = ({
   onClick,
   startIcon: StartIcon,
   endIcon: EndIcon,
+  type,
+  href,
+  fullWidth,
 }: ButtonProps) => {
   return (
     <ButtonMUI
@@ -23,6 +26,9 @@ const Button = ({
       disabled={disabled}
       startIcon={StartIcon ? <StartIcon /> : undefined}
       endIcon={EndIcon ? <EndIcon /> : undefined}
+      fullWidth={fullWidth}
+      type={type}
+      href={href}
     >
       {label}
     </ButtonMUI>

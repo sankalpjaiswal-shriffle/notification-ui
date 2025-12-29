@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Button from "./Button";
 import { fn } from "storybook/test";
-import type { ButtonProps } from "./types";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -39,12 +38,7 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-const ButtonWrapper = (args: ButtonProps) => {
-  return <Button {...args} onClick={() => args?.onClick?.()} />;
-};
-
 const Primary: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "primary",
@@ -54,7 +48,6 @@ const Primary: Story = {
 };
 
 const Secondary: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "secondary",
@@ -64,7 +57,6 @@ const Secondary: Story = {
 };
 
 const Success: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "success",
@@ -74,7 +66,6 @@ const Success: Story = {
 };
 
 const Info: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "info",
@@ -83,8 +74,25 @@ const Info: Story = {
   },
 };
 
+const Warning: Story = {
+  args: {
+    variant: "contained",
+    color: "warning",
+    size: "large",
+    label: "Warning",
+  },
+};
+
+const Error: Story = {
+  args: {
+    variant: "contained",
+    color: "error",
+    size: "large",
+    label: "Error",
+  },
+};
+
 const TextBtn: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "text",
     color: "success",
@@ -94,7 +102,6 @@ const TextBtn: Story = {
 };
 
 const ContainedBtn: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "info",
@@ -104,7 +111,6 @@ const ContainedBtn: Story = {
 };
 
 const OutlinedBtn: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "outlined",
     color: "warning",
@@ -114,7 +120,6 @@ const OutlinedBtn: Story = {
 };
 
 const StartIconBtn: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "success",
@@ -125,7 +130,6 @@ const StartIconBtn: Story = {
 };
 
 const EndIconBtn: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "info",
@@ -136,7 +140,6 @@ const EndIconBtn: Story = {
 };
 
 const DisabledBtn: Story = {
-  render: (args) => <ButtonWrapper {...args} />,
   args: {
     variant: "contained",
     color: "info",
@@ -151,6 +154,8 @@ export {
   Secondary,
   Success,
   Info,
+  Warning,
+  Error,
   TextBtn,
   ContainedBtn,
   OutlinedBtn,

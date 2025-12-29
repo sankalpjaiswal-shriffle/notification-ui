@@ -3,6 +3,7 @@ import type React from "react";
 
 type variant = "text" | "contained" | "outlined";
 type size = "small" | "medium" | "large";
+type type = "button" | "submit" | "reset";
 type color =
   | "primary"
   | "secondary"
@@ -18,9 +19,12 @@ interface ButtonProps {
   size: size;
   color?: color;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   startIcon?: React.ElementType<SvgIconProps>;
   endIcon?: React.ElementType<SvgIconProps>;
+  fullWidth: boolean;
+  type?: type;
+  href: string;
 }
 
 export type { ButtonProps };
